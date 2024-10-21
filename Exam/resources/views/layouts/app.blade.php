@@ -64,9 +64,9 @@
                             @endif
                         @else
                         <div class="dropdown">
-                            <p class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ Auth::user()->name }}
-                            </p>
+                            </button>
                             <div class="dropdown-content">
                                 <a href="{{ route('logout') }}" class="text-dark" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
