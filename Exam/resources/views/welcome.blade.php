@@ -82,6 +82,22 @@
         justify-content: center;
         align-items: center;
     }
+    .home::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8); /* Adjust the last value for darkness */
+    z-index: 1; /* Ensure it's below the text but above the background */
+}
+
+.home > * {
+    position: relative; /* Ensure child elements are above the overlay */
+    z-index: 2; /* Make sure content is above the overlay */
+}
+
 
     .content {
         position: relative;
@@ -340,7 +356,7 @@
     <div class="row">
 
         <div class="image">
-            <img src="images/injera1.jpg" alt="">
+            <img src="images/injera2.jpg" alt="">
         </div>
 
         <form action="">
