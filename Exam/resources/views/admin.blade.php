@@ -2,19 +2,20 @@
 
 @section('content')
     <div class="container">
-        <h1>Admin Vehicle Management</h1>
+        <h1>Admin </h1>
 
-        <a href="{{ route('vehicle.create') }}" class="btn btn-primary">Add New Vehicle</a>
-
-        @if($vehicles->count())
+        <a href="{{ route('vehicle.create') }}" class="btn btn-primary">Add New Package</a>
+<br/>
+<br/>
+@if($vehicles->count())
             <table class="table">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Make</th>
-                        <th>Model</th>
-                        <th>Year</th>
-                        <th>License Plate</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Price</th>
+                        <th>Markert</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -39,7 +40,7 @@
                 </tbody>
             </table>
         @else
-            <p>No vehicles found.</p>
+            <p>No Packages found.</p>
         @endif
     </div>
 @endsection
