@@ -1,4 +1,6 @@
+@section('content')
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -70,15 +72,32 @@
 </section>
 
 <style>
-    .home {
-        position: relative;
-        width: 100%;
-        min-height: 100vh;
-        background: url('images/bg1.jpeg') no-repeat center center/cover;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+   .home {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background: url('images/bg1.jpeg') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8); /* Adjust the last value for darkness */
+    z-index: 1; /* Ensure it's below the text but above the background */
+}
+
+.home > * {
+    position: relative; /* Ensure child elements are above the overlay */
+    z-index: 2; /* Make sure content is above the overlay */
+}
+
 
     .content {
         position: relative;
@@ -145,140 +164,75 @@
 
 
     <div class="box-container owl-carousel first_carousel">
-      
-        <div class="box wow fadeInUp" data-wow-duration="2s">
-            <a href="images/blackinj2.jpg" data-lightbox="image-1"><img src="images/blackinj2.jpg" alt="image"></a>
-            <div class="content">
-                <h3>Black Injera </h3>
-                
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                </div>
-                <div class="price"> $50.00 <span>$120.00</span> </div>
-                <a href="{{ route('login') }}" class="btn">buy now</a>
-            </div>
-        </div>
-
-        <div class="box wow fadeInUp" data-wow-duration="2s">
-            <a href="images/injera3.jpeg" data-lightbox="image-1" data-title="Hawaii"><img src="images/injera3.jpeg" alt="image"></a>
-            <div class="content">
-                <h3>White injera</h3>
-                {{-- <p>Arba Minch and the Nechisar National Park (by flight) - Inside Ethiopia Tours</p> --}}
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                </div>
-                <div class="price"> $60.00 <span>$100.00</span> </div>
-                <a href="{{ route('login') }}" class="btn">buy now</a>
-            </div>
-        </div>
-
-        <div class="box wow fadeInUp" data-wow-duration="2s">
-            <a href="images/blackandwhite.jpg" data-lightbox="image-3" data-title="Sydney"><img src="images/blackandwhite.jpg" alt="image"></a>
-            <div class="content">
-                <h3>Mixed Injera </h3>
-              
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                </div>
-                <div class="price"> $130.00 <span>$150.00</span> </div>
-                <a href="{{ route('login') }}" class="btn">buy now</a>
-            </div>
-        </div>
-
-        {{-- <div class="box wow fadeInUp" data-wow-duration="2s">
-            <a href="images/tig.jpeg" data-lightbox="image-4" data-title="My caption"><img src="images/tig.jpeg" alt="image"></a>
-            <div class="content">
-                <h3>Tigray </h3>
-                <p> Ethiopia - Tigray - Home away from Home</p>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                </div>
-                <div class="price"> $50.00 <span>$90.00</span> </div>
-                <a href="#" class="btn">book now</a>
-            </div>
-        </div> --}}
-
+        @if($vehicles->count())
+            @foreach($vehicles as $vehicle)
+                @if($vehicle->license_plate == 'export') <!-- Check if license_plate is 'export' -->
+                    <div class="box wow fadeInUp" data-wow-duration="2s">
+                        <a href="images/injera5.jpg">
+                            <img src="images/injera5.jpg" alt="image">
+                        </a> 
+                        <div class="content">
+                            <h3>Type : {{ $vehicle->make }}</h3>
+                            <h3>Amount : {{ $vehicle->model }}</h3>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="price"><h3>Price: ${{ $vehicle->year }}</h3></div>
+                            <a href="{{ route('vehicle.show', $vehicle->id) }}" class="btn">buy now</a>
+                        </div>
+                    </div>
+                @endif
+            @endforeach
+        @else
+            <p>No Injera packages found.</p>
+        @endif
     </div>
-
+    
     <!-- section item start  -->
 
+    <br/>
+    <br/>
     <br/>
     <br/>
         <h1 style="text-align: center;    font-size: 28px;  text-transform: uppercase; margin-bottom: 10px;">
             Domestic Market
         </h1>
 
-    <div class="box-container secound_carousel owl-carousel ">
-        <div class="box wow fadeInUp" data-wow-duration="2s">
-            <a href="images/injera5.jpg" data-lightbox="image-1" ><img src="images/injera5.jpg" alt="image"></a>
-            <div class="content">
-                <h3>White injera</h3>
-                
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                </div>
-                <div class="price"> 7000 birr <span>1000</span> </div>
-                <a href="{{ route('login') }}" class="btn">buy now</a>
-            </div>
+        <div class="box-container owl-carousel first_carousel">
+            @if($vehicles->count())
+                @foreach($vehicles as $vehicle)
+                    @if($vehicle->license_plate == 'local') <!-- Check if license_plate is 'local' -->
+                        <div class="box wow fadeInUp" data-wow-duration="2s">
+                            <a href="images/injera5.jpg">
+                                <img src="images/injera5.jpg" alt="image">
+                            </a> 
+                            <div class="content">
+                                <h3>Type : {{ $vehicle->make }}</h3>
+                                <h3>ID : {{ $vehicle->id }}</h3>
+                                <h3>Amount : {{ $vehicle->model }}</h3>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="price"><h3>Price: {{ $vehicle->year }} birr</h3></div>
+                                <a href="{{ route('vehicle.show', $vehicle->id) }}" class="btn">buy now</a> <!-- Pass the vehicle ID here -->
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+            @else
+                <p>No Injera packages found.</p>
+            @endif
         </div>
-
-        <div class="box wow fadeInUp" data-wow-duration="2s">
-            <a href="images/blackandwhite.jpg" data-lightbox="image-3"><img src="images/blackandwhite.jpg" alt="image"></a>
-            <div class="content">
-                <h3>Injera </h3>
-
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                </div>
-                <div class="price">8000.00 birr <span>1200</span> </div>
-                <a href="{{ route('login') }}" class="btn">buy now</a>
-            </div>
-        </div>
-
-        <div class="box wow fadeInUp" data-wow-duration="2s">
-            <a href="images/injera5.jpg" data-lightbox="image-4" ><img src="images/injera5.jpg" alt="image"></a>
-            <div class="content">
-                <h3>white injera </h3>
-
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                </div>
-                <div class="price"> $50.00 <span>$90.00</span> </div>
-                <a href="{{ route('login') }}" class="btn">buy now</a>
-            </div>
-        </div>
-    </div>
-
-</section>
-
+        
+        
 <!-- packages section ends -->
 
 <!-- services section starts  -->
@@ -294,32 +248,32 @@
         <div class="box wow fadeInUp" data-wow-duration="2s">
             <i class="fas fa-check-circle"></i>
             <h3>High quiality Enjera</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore commodi earum, quis voluptate exercitationem ut minima itaque iusto ipsum corrupti!</p>
+            <p>We provide premium Enjera, crafted to meet high standards of quality and taste, ensuring an authentic Ethiopian culinary experience.</p>
         </div>
         <div class="box wow fadeInUp" data-wow-duration="2s">
             <i class="fas fa-boxes"></i>
             <h3>Large quantity</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore commodi earum, quis voluptate exercitationem ut minima itaque iusto ipsum corrupti!</p>
+            <p>We offer large quantities of Enjera, perfect for events, restaurants, and retailers, ensuring everyone enjoys this beloved staple.</p>
         </div>
         <div class="box wow fadeInUp" data-wow-duration="2s">
             <i class="fas fa-truck"></i>
             <h3>Export</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore commodi earum, quis voluptate exercitationem ut minima itaque iusto ipsum corrupti!</p>
+            <p>Our Export Enjera is meticulously prepared to meet international standards, bringing authentic Ethiopian flavors to customers worldwide.</p>
         </div>
         <div class="box wow fadeInUp" data-wow-duration="2s">
             <i class="fas fa-shipping-fast"></i>
             <h3>Delivery</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore commodi earum, quis voluptate exercitationem ut minima itaque iusto ipsum corrupti!</p>
+            <p>Enjoy fast and reliable delivery of our fresh Enjera right to your doorstep, making it easy to savor authentic Ethiopian cuisine anytime.</p>
         </div>
         <div class="box wow fadeInUp" data-wow-duration="2s">
             <i class="fas fa-credit-card"></i>
             <h3>Online Payment</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore commodi earum, quis voluptate exercitationem ut minima itaque iusto ipsum corrupti!</p>
+            <p>Experience hassle-free shopping with our secure online payment options, ensuring your transactions are quick and protected.</p>
         </div>
         <div class="box wow fadeInUp" data-wow-duration="2s">
             <i class="fas fa-headset"></i>
             <h3>Call agent guidance</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore commodi earum, quis voluptate exercitationem ut minima itaque iusto ipsum corrupti!</p>
+            <p>Our friendly call agents are ready to assist you with questions, orders, or delivery options, ensuring you receive the support you need.</p>
         </div>
 
     </div>
@@ -337,7 +291,7 @@
     <div class="row">
 
         <div class="image">
-            <img src="images/injera1.jpg" alt="">
+            <img src="images/injera2.jpg" alt="">
         </div>
 
         <form action="">
@@ -362,7 +316,7 @@
 
 <!-- footer section  -->
 
-<section class="footer">
+<section class="footer" style="width: 100%;">
 
     <div class="box-container">
 
