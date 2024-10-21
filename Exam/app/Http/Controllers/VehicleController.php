@@ -39,7 +39,7 @@ class VehicleController extends Controller
         $request->validate([
             'make' => 'required|string',
             'model' => 'required|string',
-            'year' => 'required|integer|gte:1900',
+            'year' => 'required|string',
             'license_plate' => 'required|string',
         ]);
 
@@ -60,7 +60,7 @@ class VehicleController extends Controller
         $request->validate([
             'make' => 'required|string',
             'model' => 'required|string',
-            'year' => 'required|integer|gte:1900',
+            'year' => 'required|string',
             'license_plate' => 'required|string',
         ]);
 
